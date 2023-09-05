@@ -274,6 +274,7 @@ class perform_site_check(difference_detection_processor):
                 else:
                     # extract text
                     do_anchor = self.datastore.data["settings"]["application"].get("render_anchor_tag_content", False)
+                    html_content = html_tools.add_domain_to_href_links(html_content, watch.link)                    
                     stripped_text_from_html = \
                         html_tools.html_to_text(
                             html_content,

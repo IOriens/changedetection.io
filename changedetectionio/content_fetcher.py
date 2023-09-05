@@ -610,12 +610,18 @@ class base_html_webdriver(Fetcher):
         from selenium import webdriver
         from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
         from selenium.common.exceptions import WebDriverException
+        from selenium.webdriver.chromium.options import ChromiumOptions as Options
         # request_body, request_method unused for now, until some magic in the future happens.
+
+        driver_options = Options()
+        driver_options.add_argument("--user-data-dir=/Users/IOriens/Library/Application Support/Google/Chrome")
+        driver_options.add_argument('--profile-directory=Default')
 
         # check env for WEBDRIVER_URL
         self.driver = webdriver.Remote(
             command_executor=self.command_executor,
             desired_capabilities=DesiredCapabilities.CHROME,
+            options=driver_options,
             proxy=self.proxy)
 
         try:
@@ -649,9 +655,15 @@ class base_html_webdriver(Fetcher):
     def is_ready(self):
         from selenium import webdriver
         from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+        from selenium.webdriver.chromium.options import ChromiumOptions as Options
+
+        driver_options = Options()
+        driver_options.add_argument("--user-data-dir=/Users/IOriens/Library/Application Support/Google/Chrome")
+        driver_options.add_argument('--profile-directory=Default')
 
         self.driver = webdriver.Remote(
             command_executor=self.command_executor,
+            options=driver_options,
             desired_capabilities=DesiredCapabilities.CHROME)
 
         # driver.quit() seems to cause better exceptions
