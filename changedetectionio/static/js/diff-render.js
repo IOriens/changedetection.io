@@ -35,6 +35,25 @@ function changed() {
     fragment.appendChild(node);
   }
 
+  // traverse all dom nodes, if innerText has http, add <a> tag
+  var allNodes = Array.from(fragment.querySelectorAll("*"));
+  for (var i = 0, max = allNodes.length; i < max; i++) {
+    
+    var node = allNodes[i];
+    
+    if (node.innerText && node.innerText.includes("http")) {      
+      if(node.innerHTML.includes("a href")) continue;
+      var nodeText = node.innerText;
+      var urlRegex = /(https?:\/\/[^\s\)]+)/g;
+      var content = nodeText.replaceAll(urlRegex, (match) => {           
+          return `<a href="${match}" target="_blank">${match}</a>`;
+      });
+      node.innerHTML = content;      
+    }
+  }
+
+
+
   result.textContent = "";
   result.appendChild(fragment);
 
