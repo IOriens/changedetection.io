@@ -446,13 +446,11 @@ def add_domain_to_href_links(content, url):
     """
     soup = BeautifulSoup(content, 'html.parser')
     domain = re.search(r'(https?://[^/]+)', url).group(1)
-    print(domain, url)
-    print(content)
     for link in soup.findAll('a'):
         if link.has_attr('href'):
             print(link['href'])
             if link['href'].startswith('/'):
                 link['href'] = domain + link['href'].split('#')[0]
-            else:
-                print('not starting with /')
+            if link['href'].startswith('#'):
+                link['href'] = url + link['href']
     return str(soup)

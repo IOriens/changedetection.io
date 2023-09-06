@@ -151,7 +151,9 @@ html[data-darkmode="true"] {
     border: 1px solid transparent;
     vertical-align: top;
     font: 1em monospace;
-    text-align: left; }
+    text-align: left;
+    line-height: 1.8;
+    font-size: 13px; }
   #diff-ui pre {
     white-space: pre-wrap; }
 
