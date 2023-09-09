@@ -19,17 +19,17 @@ def customSequenceMatcher(before, after, include_equal=False, include_removed=Tr
             g = before[alo:ahi]
             yield g
         elif include_removed and tag == 'delete':
-            row_prefix = "(removed) " if include_change_type_prefix else ''
+            row_prefix = "(d) " if include_change_type_prefix else ''
             g = [ row_prefix + i for i in same_slicer(before, alo, ahi)]
             yield g
         elif include_replaced and tag == 'replace':
-            row_prefix = "(changed) " if include_change_type_prefix else ''
+            row_prefix = "(m) " if include_change_type_prefix else ''
             g = [row_prefix + i for i in same_slicer(before, alo, ahi)]
-            row_prefix = "(into) " if include_change_type_prefix else ''
+            row_prefix = "(i) " if include_change_type_prefix else ''
             g += [row_prefix + i for i in same_slicer(after, blo, bhi)]
             yield g
         elif include_added and tag == 'insert':
-            row_prefix = "(added) " if include_change_type_prefix else ''
+            row_prefix = "(a) " if include_change_type_prefix else ''
             g = [row_prefix + i for i in same_slicer(after, blo, bhi)]
             yield g
 
