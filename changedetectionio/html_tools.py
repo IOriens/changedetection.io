@@ -453,4 +453,6 @@ def add_domain_to_href_links(content, url):
                 link['href'] = domain + link['href'].split('#')[0]
             if link['href'].startswith('#'):
                 link['href'] = url + link['href']
+            if link['href'].startswith('.'):
+                link['href'] = url + link['href']
     return str(soup)
