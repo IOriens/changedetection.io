@@ -36,7 +36,7 @@ def main():
     do_cleanup = False
     host = ''
     ipv6_enabled = False
-    port = os.environ.get('PORT') or 5000
+    port = os.environ.get('PORT') or 5003
     ssl_mode = False
 
     # On Windows, create and use a default path.

@@ -612,6 +612,7 @@ class base_html_webdriver(Fetcher):
         from selenium import webdriver
         from selenium.webdriver.chrome.options import Options as ChromeOptions
         from selenium.common.exceptions import WebDriverException
+        from selenium.webdriver.chromium.options import ChromiumOptions as Options
         # request_body, request_method unused for now, until some magic in the future happens.
 
         options = ChromeOptions()
