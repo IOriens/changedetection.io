@@ -121,6 +121,11 @@ $(document).ready(function () {
       //	document.title = "Diff " + radio.value.slice(4);
   }
 
+    onDiffTypeChange(
+        document.querySelector('#settings [name="diff_type"]:checked'),
+    );
+    changed();
+
   var radio = document.getElementsByName("diff_type");
   for (var i = 0; i < radio.length; i++) {
       radio[i].onchange = function (e) {

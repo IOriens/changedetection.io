@@ -284,7 +284,7 @@ ul#requests-extra_browsers {
   --color-last-checked: #bbb;
   --color-text-footer: #444;
   --color-border-watch-table-cell: #eee;
-  --color-text-watch-tag-list: #e70069;
+  --color-text-watch-tag-list: rgba(231, 0, 105, 0.4);
   --color-background-new-watch-form: rgba(0, 0, 0, 0.05);
   --color-background-new-watch-input: var(--color-white);
   --color-text-new-watch-input: var(--color-text);
@@ -327,7 +327,7 @@ html[data-darkmode="true"] {
   --color-background-input: var(--color-grey-350);
   --color-text-input-description: var(--color-grey-600);
   --color-text-input-placeholder: var(--color-grey-600);
-  --color-text-watch-tag-list: #fa3e92;
+  --color-text-watch-tag-list: rgba(250, 62, 146, 0.4);
   --color-background-code: var(--color-grey-200);
   --color-background-tab: rgba(0, 0, 0, 0.2);
   --color-background-tab-hover: rgba(0, 0, 0, 0.5);
@@ -342,6 +342,8 @@ html[data-darkmode="true"] {
   html[data-darkmode="true"] .watch-table .title-col a[target="_blank"]::after,
   html[data-darkmode="true"] .watch-table .current-diff-url::after {
     filter: invert(0.5) hue-rotate(10deg) brightness(2); }
+  html[data-darkmode="true"] .watch-table .status-browsersteps {
+    filter: invert(0.5) hue-rotate(10deg) brightness(1.5); }
   html[data-darkmode="true"] .watch-table .watch-controls .state-off img {
     opacity: 0.3; }
   html[data-darkmode="true"] .watch-table .watch-controls .state-on img {
@@ -530,8 +532,11 @@ code {
     margin: 0 3px 0 5px; }
 
 .watch-tag-list {
-  color: var(--color-text-watch-tag-list);
-  white-space: nowrap; }
+  color: var(--color-white);
+  white-space: nowrap;
+  background: var(--color-text-watch-tag-list);
+  border-radius: 5px;
+  padding: 2px 5px; }
 
 .box {
   max-width: 80%;
@@ -683,11 +688,23 @@ label:hover {
   #new-watch-form legend {
     color: var(--color-text-legend);
     font-weight: bold; }
-  #new-watch-form #watch-add-wrapper-zone > div {
-    display: inline-block; }
-  @media only screen and (max-width: 760px) {
-    #new-watch-form #watch-add-wrapper-zone #url {
-      width: 100%; } }
+  #new-watch-form #watch-add-wrapper-zone {
+    /* URL field grows always, other stay static in width */ }
+    @media only screen and (min-width: 760px) {
+      #new-watch-form #watch-add-wrapper-zone {
+        display: flex;
+        gap: 0.3rem;
+        flex-direction: row; } }
+    #new-watch-form #watch-add-wrapper-zone > span {
+      flex-grow: 0; }
+      #new-watch-form #watch-add-wrapper-zone > span input {
+        width: 100%;
+        padding-right: 1em; }
+      #new-watch-form #watch-add-wrapper-zone > span:first-child {
+        flex-grow: 1; }
+    @media only screen and (max-width: 760px) {
+      #new-watch-form #watch-add-wrapper-zone #url {
+        width: 100%; } }
 
 #diff-col {
   padding-left: 40px; }
@@ -1024,17 +1041,18 @@ body.full-width .edit-form {
     color: var(--color-text-input-description); }
     .edit-form .pure-form-message-inline code {
       font-size: .875em; }
-  .edit-form .text-filtering {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    border-radius: 5px;
-    margin-bottom: 1rem; }
-    .edit-form .text-filtering h3 {
-      margin-top: 0; }
-    .edit-form .text-filtering fieldset:last-of-type {
+
+.border-fieldset {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem; }
+  .border-fieldset h3 {
+    margin-top: 0; }
+  .border-fieldset fieldset:last-of-type {
+    padding-bottom: 0; }
+    .border-fieldset fieldset:last-of-type .pure-control-group {
       padding-bottom: 0; }
-      .edit-form .text-filtering fieldset:last-of-type .pure-control-group {
-        padding-bottom: 0; }
 
 ul {
   padding-left: 1em;
@@ -1065,7 +1083,7 @@ ul {
 #selector-current-xpath {
   font-size: 80%; }
 
-#webdriver-override-options input[type="number"] {
+#webdriver_delay {
   width: 5em; }
 
 #api-key:hover {
@@ -1166,3 +1184,13 @@ ul {
   .restock-label.not-in-stock {
     background-color: var(--color-background-button-cancel);
     color: #777; }
+
+#chrome-extension-link {
+  padding: 9px;
+  border: 1px solid var(--color-grey-800);
+  border-radius: 10px;
+  vertical-align: middle; }
+  #chrome-extension-link img {
+    height: 21px;
+    padding: 2px;
+    vertical-align: middle; }
